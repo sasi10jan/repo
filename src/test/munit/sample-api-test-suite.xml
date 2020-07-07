@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd">
+	<munit:config name="sample-api-test-suite.xml" />
+	<munit:test name="sample-api-test-suite-sample-apiFlowTest" doc:id="00f262cd-a8c8-4789-b364-20778d0df76f" description="Test">
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock when" doc:id="28b77318-ad3f-437c-92e0-7b545d7f7e07" processor="http:listener">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="Listener" attributeName="doc:name" />
+					<munit-tools:with-attribute whereValue="9c21535a-391d-435c-bc6e-1903c9549121" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<munit:set-event doc:name="Set Event" doc:id="8c3a97b8-b5e9-40f2-9bd4-9ca202fe2b5a" >
+				<munit:payload value='"sasikala"' />
+			</munit:set-event>
+			<flow-ref doc:name="Flow-ref to sample-apiFlow" doc:id="8854c8d7-5ca2-459b-bab0-0f7df83df79b" name="sample-apiFlow"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-equals doc:name="Assert equals" doc:id="a141fdf1-fb6a-4f8d-a081-0bb29ba515e9" expected='"sasikala"' actual="payload"/>
+		</munit:validation>
+	</munit:test>
+
+
+</mule>
